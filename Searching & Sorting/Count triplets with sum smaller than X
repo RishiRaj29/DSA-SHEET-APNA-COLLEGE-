@@ -1,0 +1,33 @@
+/*          Count triplets with sum smaller than X            */
+
+Soluion using two pointers->
+For every index in arr apply two pointer technique.
+
+class Solution{
+	public:
+	long long countTriplets(long long arr[], int n, long long sum)
+	{
+	    long long count=0;
+	    sort(arr,arr+n);
+	    int low,high,k;
+	    
+	    for(k=0;k<n;k++)
+	    {
+	        low=k+1;high=n-1;
+	        while(low<high)
+	        {
+	            if(arr[low]+arr[high]+arr[k]<sum)
+	            {
+	                count+=(high-low); // Since all elements are sorted hence include all the elements 
+	                low++;
+	            }
+	            else
+	            {
+	                high--;
+	            }
+	        }
+	    }
+	    
+	    return count;
+	}
+};
