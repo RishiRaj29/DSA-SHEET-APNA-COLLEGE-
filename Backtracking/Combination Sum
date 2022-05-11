@@ -1,0 +1,41 @@
+/*        Combination Sum            */
+
+// Solution-> Before attempting this question you must know the concept to generate all subsequences of an array.
+
+void fun(int index,vector<int> &nums,int sum,vector<int> &ds,vector<vector<int>> &ans)
+{
+    if(sum==0 or index==nums.size())
+    {
+        if(sum==0)
+        {
+            ans.push_back(ds);
+        }
+        return;
+    }
+    
+    if(sum>=nums[index])
+    {
+        ds.push_back(nums[index]);
+        fun(index,nums,sum-nums[index],ds,ans);
+        ds.pop_back();
+    }
+    fun(index+1,nums,sum,ds,ans);
+}
+
+
+class Solution {
+  public:
+    //Function to return a list of indexes denoting the required 
+    //combinations whose sum is equal to given number.
+    vector<vector<int> > combinationSum(vector<int> &A, int B) {
+        // Your code here
+        sort(A.begin(),A.end());
+        
+        A.erase(unique(A.begin(), A.end()), A.end());
+        
+        vector<vector<int>> ans;
+        vector<int> ds;
+        fun(0,A,B,ds,ans);
+        return ans;
+    }
+};
