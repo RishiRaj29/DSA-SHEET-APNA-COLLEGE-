@@ -1,0 +1,31 @@
+/*              Backtracking Set 2 Rat in a Maze                     */
+
+class Solution{
+    public:
+    void fun(int row,int col,int n,vector<vector<int>> &m,vector<string> &ans,string t)
+    {
+        if(row==n-1 and col==n-1)
+        {
+            ans.push_back(t);
+            return;
+        }
+        
+        if(row<0 || row>n-1 || col<0 || col>n-1 || m[row][col]==0)
+            return;
+            
+        m[row][col]=0;
+        fun(row+1,col,n,m,ans,t+"D");
+        fun(row-1,col,n,m,ans,t+"U");
+        fun(row,col+1,n,m,ans,t+"R");
+        fun(row,col-1,n,m,ans,t+"L");
+        m[row][col]=1;
+    }
+    vector<string> findPath(vector<vector<int>> &m, int n) {
+        // Your code goes here
+        vector<string> ans;
+        if(m[0][0]==0 or m[n-1][n-1]==0)
+            return ans;
+        fun(0,0,n,m,ans,"");
+        return ans;
+    }
+};
