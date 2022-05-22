@@ -1,0 +1,45 @@
+/*              Activity selection problem greedy algorithm                   */
+
+/* Hints->
+1) Sort the given time intervals in the ascending order of end time
+2) Ensure the end time of previously selected interval is < than the start time of the given interval
+*/
+
+bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
+{
+    return (a.second < b.second);
+}
+
+class Solution
+{
+    public:
+    //Function to find the maximum number of activities that can
+    //be performed by a single person.
+    int activitySelection(vector<int> start, vector<int> end, int n)
+    {
+        // Your code here
+        vector<pair<int,int>> act;
+        
+        for(int i=0;i<n;i++)
+        {
+            act.push_back(make_pair(start[i],end[i]));
+        }
+        
+        sort(act.begin(),act.end(),sortbysec);
+        
+        int count=1,s=act[0].first,e=act[0].second,i=1;
+        
+        while(i<n)
+        {
+            if(e!=act[i].first and act[i].first>e)
+            {
+                count++;
+                s=act[i].first;
+                e=act[i].second;
+            }
+            i++;
+            
+        }
+        return count;
+    }
+};
