@@ -1,0 +1,19 @@
+/*       k largest elements in an array       */
+
+// Use heap in this question
+
+class Solution{
+public:	
+	vector<int> kLargest(int arr[], int n, int k) {
+	    // code here
+	       vector<int>ans;
+           priority_queue<int>heap(arr,arr+n);
+           while(k--)
+           {
+               ans.push_back(heap.top());
+               heap.pop();
+           }
+           return ans;
+	}
+
+};
